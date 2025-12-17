@@ -19,19 +19,27 @@ public class DataRetriever {
         List<Ingredient> ingredients = new ArrayList<>();
         String sql = "SELECT * FROM ingredient LIMIT ? OFFSET ?";
 
-        try(Connection conn = dbConnection.getDBConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)){
+        try (Connection conn = dbConnection.getDBConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1,size);
+            pstmt.setInt(1, size);
             pstmt.setInt(2, (page - 1) * size);
 
-            try (ResultSet rs = pstmt.executeQuery()){
-                while (rs.next()){
-
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    // Transformation d'une ligne SQL en objet Java
+                    Ingredient ing = new Ingredient(
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getDouble("price"),
+                            CategoryEnum.valueOf(rs.getString("category")),
+                            rs.getInt("id_dish")
+                    );
+                    ingredients.add(ing);
                 }
             }
-        }catch (SQLException e){
-            throw new RuntimeException("Erreur lors de la recuperation", e);
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération", e);
         }
         return ingredients;
     }
