@@ -17,7 +17,7 @@ public class DataRetriever {
     //6-a
     public List<Ingredient> findIngredients(int page, int size) {
         List<Ingredient> ingredients = new ArrayList<>();
-        String sql = "SELECT * FROM ingredients LIMIT ? OFFSET ?";
+        String sql = "SELECT * FROM ingredient LIMIT ? OFFSET ?";
 
         try(Connection conn = dbConnection.getDBConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){

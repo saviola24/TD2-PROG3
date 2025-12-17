@@ -8,6 +8,11 @@ public class Dish {
     private DishTypeEnum dishtype;
     private List<Ingredient> ingredients;
 
+    public double getDishCost(){
+        return  ingredients == null ? null : ingredients
+                .stream().mapToDouble(Ingredient::getPrice).sum();
+    }
+
 
     public Dish(Integer id, String name, DishTypeEnum dishtype) {
         this.id = id;
