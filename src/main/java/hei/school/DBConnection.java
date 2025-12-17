@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class DBConnection {
     public Connection getDBConnection()  throws SQLException {
         return DriverManager.getConnection(
-                System.getenv("JDBC_URL"),
-                System.getenv("USERNAME"),
-                System.getenv("PASSWORD")
+                System.getenv("jdbc:postgresql://localhost:5432/mini_dish_db"),
+                System.getenv("mini_dish_db_manager"),
+                System.getenv("123456")
         );
     }
 }

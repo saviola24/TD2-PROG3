@@ -15,6 +15,10 @@ public class Ingredient {
         this.idDish = idDish;
     }
 
+    public String getDishName() {
+        throw new RuntimeException("Not implemented");
+    }
+
     public Integer getId() {
         return id;
     }
