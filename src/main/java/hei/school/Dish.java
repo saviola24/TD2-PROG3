@@ -1,54 +1,34 @@
 package hei.school;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Dish {
     private Integer id;
     private String name;
-    private DishTypeEnum dishtype;
-    private List<Ingredient> ingredients;
+    private DishTypeEnum dishType;
+    private Double price; // Nouveau : prix de vente
+    private List<Ingredient> ingredients = new ArrayList<>();
 
-    public double getDishCost(){
-        return  ingredients == null ? null : ingredients
-                .stream().mapToDouble(Ingredient::getPrice).sum();
-    }
-
-
-    public Dish(Integer id, String name, DishTypeEnum dishtype) {
+    public Dish(Integer id, String name, DishTypeEnum dishType) {
         this.id = id;
         this.name = name;
-        this.dishtype = dishtype;
+        this.dishType = dishType;
     }
 
-    public Integer getId() {
-        return id;
+    public Double getDishCost() {
+        return ingredients.stream().mapToDouble(Ingredient::getPrice).sum();
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Double getGrossMargin() {
+        if (this.price == null) {
+            throw new RuntimeException("Prix de vente non fixé pour le plat : " + this.name);
+        }
+        return this.price - getDishCost();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public DishTypeEnum getDishtype() {
-        return dishtype;
-    }
-
-    public void setDishtype(DishTypeEnum dishtype) {
-        this.dishtype = dishtype;
-    }
-
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
+    public DishTypeEnum getDishType() { return dishType; }
+    public String getName() { return name; }
+    public List<Ingredient> getIngredients() { return ingredients; }
+    public void setPrice(Double price) { this.price = price; }
 }

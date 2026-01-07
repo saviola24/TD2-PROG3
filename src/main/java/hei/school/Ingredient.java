@@ -3,11 +3,11 @@ package hei.school;
 public class Ingredient {
     private Integer id;
     private String name;
-    private double price;
+    private Double price;
     private CategoryEnum category;
     private Integer idDish;
 
-    public Ingredient(Integer id, String name, double price, CategoryEnum category, Integer idDish) {
+    public Ingredient(Integer id, String name, Double price, CategoryEnum category, Integer idDish) {
         this.id = id;
         this.name = name;
         this.price = price;
