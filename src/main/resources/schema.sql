@@ -5,12 +5,14 @@ ALTER TABLE Dish ADD COLUMN IF NOT EXISTS price NUMERIC;
 CREATE TABLE Dish (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    dish_type dish_type_enum NOT NULL
+    dish_type dish_type_enum NOT NULL,
+    price DOUBLE PRECISION DEFAULT 0
 );
 
-CREATE TABLE Indredient(
+CREATE TABLE Ingredient(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
+    price DOUBLE PRECISION NOT NULL,
     category category_enum NOT NULL,
     id_dish INT,
     CONSTRAINT fk_dish FOREIGN KEY (id_dish) REFERENCES Dish(id) ON DELETE SET NULL

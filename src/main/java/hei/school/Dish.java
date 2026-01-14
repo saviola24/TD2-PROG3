@@ -7,7 +7,7 @@ public class Dish {
     private Integer id;
     private String name;
     private DishTypeEnum dishType;
-    private Double price; // Nouveau : prix de vente
+    private Double price; // prix de vente 
     private List<Ingredient> ingredients = new ArrayList<>();
 
     public Dish(Integer id, String name, DishTypeEnum dishType) {
@@ -31,4 +31,8 @@ public class Dish {
     public String getName() { return name; }
     public List<Ingredient> getIngredients() { return ingredients; }
     public void setPrice(Double price) { this.price = price; }
+
+    public int getId() {
+        return id;
+    }
 }

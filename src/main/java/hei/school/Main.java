@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Initialisation
         DBConnection db = new DBConnection();
         DataRetriever retriever = new DataRetriever(db);
 
@@ -24,16 +23,24 @@ public class Main {
 
 
             List<Ingredient> p2 = retriever.findIngredients(2, 2);
+            if (p2.size() >= 2) {
             System.out.println("7-c) Ingrédients p2: " + p2.get(0).getName() + ", " + p2.get(1).getName());
+            } else if (!p2.isEmpty()) {
+            System.out.println("7-c) Ingrédient p2 (un seul trouvé): " + p2.get(0).getName());
+            }
 
 
             List<Dish> dishesEur = retriever.findDishsByIngredientName("eur");
-            System.out.println("7-e) Plat trouvé: " + dishesEur.get(0).getName());
+            if (!dishesEur.isEmpty()) {
+            System.out.println("7-e: Plat trouvé: " + dishesEur.get(0).getName());
+            } else {
+            System.out.println("7-e: Aucun plat trouvé pour l'ingrédient 'eur'");
+            }
 
             try {
                 List<Ingredient> failList = List.of(
-                        new Ingredient(null, "Carotte", 2000.0, CategoryEnum.VEGETABLE),
-                        new Ingredient(null, "Laitue", 2000.0, CategoryEnum.VEGETABLE)
+                        new Ingredient(null, "Carotte", 2000.0, CategoryEnum.VEGETABLE, null),
+                        new Ingredient(null, "Laitue", 2000.0, CategoryEnum.VEGETABLE, null)
                 );
                 retriever.createIngredients(failList);
             } catch (RuntimeException e) {
